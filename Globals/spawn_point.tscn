@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba08hi61yoir8"]
+
+[ext_resource type="Script" uid="uid://d2xvrsq8xrewu" path="res://Globals/spawn_point.gd" id="1_1i56a"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1i56a"]
+size = Vector2(128, 128)
+
+[node name="SpawnPoint" type="Node3D" groups=["spawn_points"]]
+script = ExtResource("1_1i56a")
+
+[node name="debug" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="debug"]
+billboard = 1
+texture = SubResource("PlaceholderTexture2D_1i56a")

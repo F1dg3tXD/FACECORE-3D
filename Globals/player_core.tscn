@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bumktap80pt38"]
+
+[ext_resource type="Script" uid="uid://c3hkcqi4qffwo" path="res://Globals/player_core.gd" id="1_2qb1e"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j7hxt"]
+
+[node name="PlayerCore" type="CharacterBody3D"]
+script = ExtResource("1_2qb1e")
+move_speed = null
+acceleration = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_j7hxt")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+
+[node name="ground" type="RayCast3D" parent="."]
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="aim" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -1)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="weapon socket" type="Node3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2978273, -0.35754156, -0.491382)
+
+[node name="Marker3D" type="Marker3D" parent="Head/weapon socket"]
+gizmo_extents = 0.5
