@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://dpe1bnudt0ci2"]
+[gd_scene load_steps=9 format=3 uid="uid://dpe1bnudt0ci2"]
+
+[ext_resource type="Script" uid="uid://ce5d63joyjry1" path="res://Globals/PlayerVisualController.gd" id="1_virqh"]
+[ext_resource type="PackedScene" uid="uid://c8mbhco7hmpnp" path="res://shapes/cone.tscn" id="2_gjq31"]
+[ext_resource type="PackedScene" uid="uid://xr87isvjwcft" path="res://shapes/cube.tscn" id="3_5im0g"]
+[ext_resource type="PackedScene" uid="uid://dtnmpx7rocbqa" path="res://shapes/cylinder.tscn" id="4_16en0"]
+[ext_resource type="PackedScene" uid="uid://w0hijsjl7cws" path="res://shapes/icosphere.tscn" id="5_sv0xh"]
+[ext_resource type="PackedScene" uid="uid://cdewgpajsadm2" path="res://shapes/pyramid.tscn" id="6_bs28m"]
+[ext_resource type="PackedScene" uid="uid://bimuceiintcls" path="res://shapes/sphere.tscn" id="7_a2mcx"]
+[ext_resource type="PackedScene" uid="uid://bgjrffcnhq7s3" path="res://shapes/torus.tscn" id="8_lsavh"]
 
 [node name="PlayerShape" type="Node3D"]
+script = ExtResource("1_virqh")
+shape_variants = Array[PackedScene]([ExtResource("2_gjq31"), ExtResource("3_5im0g"), ExtResource("4_16en0"), ExtResource("5_sv0xh"), ExtResource("6_bs28m"), ExtResource("7_a2mcx"), ExtResource("8_lsavh")])
+primary_color = Color(0, 0, 1, 1)

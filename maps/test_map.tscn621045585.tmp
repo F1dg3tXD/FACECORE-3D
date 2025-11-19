@@ -9,9 +9,6 @@ metallic_specular = 1.0
 roughness = 0.0
 refraction_scale = 0.07
 uv1_triplanar = true
-grow = true
-proximity_fade_distance = 0.01
-distance_fade_max_distance = 15.0
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pwco0"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -28,7 +25,6 @@ ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
-sdfgi_use_occlusion = true
 glow_enabled = true
 volumetric_fog_density = 0.01
 volumetric_fog_sky_affect = 0.5
@@ -41,7 +37,6 @@ size = Vector3(100, 0.1, 100)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
-gi_mode = 2
 use_collision = true
 size = Vector3(1, 2, 1)
 material = SubResource("StandardMaterial3D_b71ab")
@@ -66,7 +61,5 @@ shadow_enabled = true
 [node name="ReflectionProbe" type="ReflectionProbe" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63400006, 5.9480224)
 update_mode = 1
-box_projection = true
-enable_shadows = true
 
 [node name="GameManager" parent="." instance=ExtResource("2_b71ab")]

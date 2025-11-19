@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://s8kbs1scc3cm" path="res://models/players/Torus.glb" id="1_kctwa"]
 
 [node name="Torus" instance=ExtResource("1_kctwa")]
+
+[node name="Torus" parent="." index="0"]
+layers = 2

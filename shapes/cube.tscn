@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://cd30bvk2oaxaa" path="res://models/players/Cube.glb" id="1_gdioy"]
 
 [node name="Cube" instance=ExtResource("1_gdioy")]
+
+[node name="Cube" parent="." index="0"]
+layers = 2

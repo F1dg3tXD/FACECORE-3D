@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://e7j2euk4oeur" path="res://models/players/Pyramid.glb" id="1_vn1d2"]
 
 [node name="Pyramid" instance=ExtResource("1_vn1d2")]
+
+[node name="Pyramid" parent="." index="0"]
+layers = 2

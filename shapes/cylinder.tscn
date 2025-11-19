@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://c67ym5eynniqp" path="res://models/players/Cylinder.glb" id="1_f50sq"]
 
 [node name="Cylinder" instance=ExtResource("1_f50sq")]
+
+[node name="Cylinder" parent="." index="0"]
+layers = 2

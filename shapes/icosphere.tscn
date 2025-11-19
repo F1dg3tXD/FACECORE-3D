@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://ccks3qjp2xa1y" path="res://models/players/Icosphere.glb" id="1_yxksx"]
 
 [node name="Icosphere" instance=ExtResource("1_yxksx")]
+
+[node name="Icosphere" parent="." index="0"]
+layers = 2

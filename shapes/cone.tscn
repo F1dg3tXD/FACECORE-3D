@@ -1,5 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8mbhco7hmpnp"]
+[gd_scene load_steps=5 format=3 uid="uid://c8mbhco7hmpnp"]
 
 [ext_resource type="PackedScene" uid="uid://qfv7oso1416c" path="res://models/players/Cone.glb" id="1_wlqpr"]
+[ext_resource type="Shader" uid="uid://b6fltysjg120u" path="res://shaders/color_mask.gdshader" id="2_bgiyx"]
+[ext_resource type="Texture2D" uid="uid://b8mtk2sofvj85" path="res://shaders/temp.jpg" id="3_q074j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wlqpr"]
+render_priority = 0
+shader = ExtResource("2_bgiyx")
+shader_parameter/mask_tex = ExtResource("3_q074j")
+shader_parameter/primary_color = Color(1, 0, 0, 1)
+shader_parameter/secondary_color = Color(0, 0, 0, 1)
+shader_parameter/albedo_strength = 1.0
 
 [node name="Cone" instance=ExtResource("1_wlqpr")]
+
+[node name="Cone" parent="." index="0"]
+layers = 2
+surface_material_override/0 = SubResource("ShaderMaterial_wlqpr")

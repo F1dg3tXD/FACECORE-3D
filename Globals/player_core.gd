@@ -20,7 +20,6 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var collider: CollisionShape3D = $Collider
 @onready var head: Node3D = $Head
-@onready var visual_root: Node3D = $Head/VisualRoot
 
 var current_height := 2.0
 var crouched := false
@@ -29,16 +28,21 @@ var crouched := false
 var yaw := 0.0  # horizontal rotation (left/right)
 var pitch := 0.0 # up/down
 @export var mouse_sensitivity := 0.08
+@onready var fps_cam: Camera3D = $Head/Camera3D
+@onready var tps_cam: Camera3D = $ThirdPersonRig/SpringArm3D/TPSCamera
+var is_tps := false
+var cam_blend_time := 0.25
 
 # ───── VISUAL SCENE ─────
-@export var visual_scene: PackedScene
-var visual: Node3D = null
+@export var visual_controller_scene: PackedScene # assigned to PlayerVisualController
+@onready var visual_root: Node3D = $Head/VisualRoot
+var visual_controller: PlayerVisualController
 
 func _ready():
-	if visual_scene:
-		visual = visual_scene.instantiate()
-		visual_root.add_child(visual)
-
+	setup_visual()
+	fps_cam.cull_mask &= ~(1 << 1) # turns off layer 2
+	fps_cam.current = true
+	tps_cam.current = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
@@ -50,13 +54,29 @@ func _input(event):
 
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 		head.rotation_degrees.x = pitch
+		
+	if event.is_action_pressed("switch_camera"):
+		toggle_camera()
+		
+func toggle_camera():
+	is_tps = !is_tps
+	
+	if is_tps:
+		fps_cam.current = false
+		tps_cam.current = true   # blend happens automatically
+	else:
+		tps_cam.current = false
+		fps_cam.current = true
 
-
-func _process(delta):
-	handle_crouch(delta)
-
+#func _process(delta):
+	#handle_crouch(delta)
+	#pass
 
 func _physics_process(delta):
+	# Update crouch state
+	crouched = Input.is_action_pressed("crouch")
+
+	handle_crouch(delta)
 	var input_dir = get_input_direction()
 
 	var target_speed = get_target_speed()
@@ -104,16 +124,36 @@ func get_target_speed() -> float:
 	return walk_speed
 
 func handle_crouch(delta):
-	var target_height = crouching_height if Input.is_action_pressed("crouch") else standing_height
-	crouched = Input.is_action_pressed("crouch")
+	# Target height
+	var target_height := crouching_height if crouched else standing_height
+	
+	# Capsule shape reference
+	var capsule := collider.shape as CapsuleShape3D
 
-	# Smooth collider scaling
-	current_height = lerp(current_height, target_height, crouch_speed_lerp * delta)
+	# Smooth collider height
+	capsule.height = lerp(capsule.height, target_height, delta * crouch_speed_lerp)
 
-	var shape = collider.shape
-	if shape is CapsuleShape3D:
-		shape.height = current_height
+	# Keep the bottom on the ground
+	collider.position.y = capsule.height / 2.0
+	
+	# Move the visual body to stay aligned with physics capsule height
+	visual_root.position.y = capsule.height * 0
 
-	# Lower the head / visuals smoothly
-	var head_target_y = current_height * 0.5
-	head.position.y = lerp(head.position.y, head_target_y, crouch_speed_lerp * delta)
+	# Smooth camera position
+	var target_head_y: float = capsule.height * 0.85
+	var pos := head.position
+	pos.y = lerp(pos.y, target_head_y, delta * crouch_speed_lerp)
+	head.position = pos
+
+
+func setup_visual():
+	if visual_controller_scene:
+		visual_controller = visual_controller_scene.instantiate()
+		visual_root.add_child(visual_controller)
+
+		# Fix: Reset its local transform so it matches visual_root perfectly
+		visual_controller.position = Vector3.ZERO
+		visual_controller.rotation = Vector3.ZERO
+		visual_controller.scale = Vector3.ONE
+
+		visual_controller.owner = self
