@@ -6,16 +6,6 @@
 
 [node name="PlayerCore" type="CharacterBody3D"]
 script = ExtResource("1_2qb1e")
-move_speed = null
-acceleration = null
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_j7hxt")
-
-[node name="VisualRoot" type="Node3D" parent="."]
-
-[node name="ground" type="RayCast3D" parent="."]
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
@@ -30,3 +20,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2978273, -0.35754156, -0.49
 
 [node name="Marker3D" type="Marker3D" parent="Head/weapon socket"]
 gizmo_extents = 0.5
+
+[node name="VisualRoot" type="Node3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+
+[node name="ground" type="RayCast3D" parent="."]
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_j7hxt")

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgjrffcnhq7s3"]
+
+[ext_resource type="PackedScene" uid="uid://s8kbs1scc3cm" path="res://models/players/Torus.glb" id="1_kctwa"]
+
+[node name="Torus" instance=ExtResource("1_kctwa")]
