@@ -11,12 +11,14 @@ config_version=5
 [application]
 
 config/name="FACECORE 3D"
+run/main_scene="uid://br7ttfsn5ubwv"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Console="*res://addons/console/console.gd"
+DevConsole="*res://Globals/dev_console.gd"
 
 [editor_plugins]
 
@@ -89,3 +91,4 @@ common/physics_interpolation=true
 [rendering]
 
 reflections/sky_reflections/ggx_samples=64
+environment/screen_space_reflection/roughness_quality=3
